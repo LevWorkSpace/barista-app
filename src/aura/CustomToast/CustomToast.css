@@ -1,0 +1,8 @@
+.THIS .slds-notify_toast {
+    min-width: auto;
+    max-width: calc(100% - 1rem);
+}
+
+.THIS .slds-notify_toast .slds-notify__content {
+    max-width: 100%;
+}

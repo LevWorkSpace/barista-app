@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="ProductSelected">
+    <aura:attribute type="Object" name="product" required="true"/>
+</aura:event>

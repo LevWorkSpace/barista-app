@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>*</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>BrandingSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CompactLayout</name>
+    </types>
+    <types>
+        <members>coffee_house</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Bill__c</members>
+        <members>Log__c</members>
+        <members>ProductBill__c</members>
+        <members>Product__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Bill__c</members>
+        <members>Log__c</members>
+        <members>NewBill</members>
+        <members>Product__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Bill_Record_Page</members>
+        <members>New_Bill</members>
+        <members>Product_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Bill__c-Admin Bill Layout</members>
+        <members>Bill__c-Barista Bill Layout</members>
+        <members>Log__c-Log Layout</members>
+        <members>ProductBill__c-Admin Product Bill Layout</members>
+        <members>ProductBill__c-Barista Product Bill Layout</members>
+        <members>Product__c-Admin Product Layout</members>
+        <members>Product__c-Barista Product Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Bill__c.All</members>
+        <members>Log__c.All</members>
+        <members>ProductBill__c.All</members>
+        <members>Product__c.All</members>
+        <name>ListView</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <members>Barista</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>unfiled$public</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+    <version>45.0</version>
+</Package>

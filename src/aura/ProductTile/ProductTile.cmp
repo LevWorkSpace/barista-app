@@ -1,0 +1,12 @@
+<aura:component description="ProductTile">
+    <aura:attribute name="product" type="Object" />
+    <aura:registerEvent name="productSelected" type="c:ProductSelected"/>
+
+    <lightning:button onclick="{!c.onProductClick}">
+        <div style="{!'background-image:url(' + (v.product.picture ? v.product.picture : '/resource/NoImage') + ')'}" class="innertile">
+            <div class="lower-third">
+                <h1 class="slds-truncate">{!v.product.name} - {!v.product.cost}&#8372;</h1>
+            </div>
+        </div>
+    </lightning:button>
+</aura:component>

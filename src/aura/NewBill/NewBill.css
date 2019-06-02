@@ -1,0 +1,43 @@
+.THIS {
+    padding: 0.1em;
+    font-size: 1.2em;
+}
+.THIS .input-discount .slds-form-element__label {
+    display: none;
+}
+.THIS .footer-total {
+    font-size: 1.4em;
+}
+.THIS .slds-input,
+.THIS .slds-select {
+    height: 3em;
+    font-size: 1.2em;
+}
+.THIS .slds-form-element__label {
+    font-size: 1em;
+}
+.THIS .icon-links {
+    width: 50px;
+}
+.THIS .centered-result {
+    text-align: -webkit-center;
+}
+.THIS .input-discount {
+    width: 7em;
+    display: inline-block;
+}
+.THIS .amount {
+    border: solid 1px rgb(221, 219, 218);
+    width: 30px;
+    line-height: 1.9;
+}
+.THIS .product-description {
+    white-space: normal;
+}
+.THIS .calc-button {
+    display: inline-block;
+}
+.THIS .total-price {
+    font-size: 1.2em;
+    border-bottom: solid 1px grey;
+}

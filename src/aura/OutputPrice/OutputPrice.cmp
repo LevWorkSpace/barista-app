@@ -1,0 +1,6 @@
+<aura:component description="OutputPrice">
+    <aura:attribute name="price" type="Decimal" required="true"/>
+    <aura:if isTrue="{!v.price != null}">
+        {!v.price}&#8372;
+    </aura:if>
+</aura:component>

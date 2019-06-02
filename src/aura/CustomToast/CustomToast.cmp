@@ -1,0 +1,27 @@
+<aura:component>
+    <aura:method name="showMessage" action="{!c.showMessage}">
+        <aura:attribute name="type" type="String" required="true" description="error,success"/>
+        <aura:attribute name="message" type="String" required="true" description="Text of toast message"/>
+        <aura:attribute name="timeout" type="Integer" description="Timeout before message will be closed"/>
+    </aura:method>
+
+    <aura:attribute name="type" type="String" access="private" />
+    <aura:attribute name="message" type="String" access="private" />
+    <aura:attribute name="isShowIcon" type="Boolean" access="private" default="true" />
+
+    <aura:attribute name="isVisible" type="Boolean" access="private" default="false"/>
+    <aura:attribute name="timeout" type="Object" access="private"/>
+
+    <aura:if isTrue="{!v.isVisible}">
+        <div class="slds-notify_container slds-is-absolute">
+            <div class="slds-is-relative">
+                <div class="{!'slds-notify slds-notify_toast slds-theme_'+v.type}" role="alert">
+                    <lightning:icon iconName="{!'utility:'+v.type}" class="slds-m-right_small slds-align-top" size="small" variant="inverse" alternativeText="{!v.type == 'error' ? 'Error' : 'Success'}" />
+                    <div class="slds-notify__content">
+                        <p class="slds-hyphenate"><aura:unescapedHtml value="{!v.message}"/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

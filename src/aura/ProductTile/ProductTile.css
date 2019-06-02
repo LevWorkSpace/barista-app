@@ -1,0 +1,23 @@
+.THIS {
+    margin: 0.2em 0;
+}
+.THIS .innertile {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+.THIS .lower-third {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, .4);
+    padding: 2px;
+    line-height: 1;
+}
+.THIS .lower-third .slds-truncate {
+    white-space:normal;
+}

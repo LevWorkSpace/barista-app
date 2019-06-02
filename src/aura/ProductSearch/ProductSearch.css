@@ -1,0 +1,9 @@
+.THIS {
+    font-size: 1.2em;
+}
+.THIS .slds-modal__close {
+    width: 4em;
+    height: 4em;
+    top: -4.5em;
+    right: 0;
+}
