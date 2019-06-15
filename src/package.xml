@@ -9,12 +9,13 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>*</members>
-        <name>BrandingSet</name>
+        <members>Bill__c.Barista</members>
+        <members>ProductBill__c.Barista</members>
+        <name>CompactLayout</name>
     </types>
     <types>
-        <members>*</members>
-        <name>CompactLayout</name>
+        <members>coffeebeans</members>
+        <name>ContentAsset</name>
     </types>
     <types>
         <members>coffee_house</members>
@@ -63,12 +64,17 @@
         <name>Profile</name>
     </types>
     <types>
-        <members>unfiled$public</members>
-        <name>Report</name>
+        <members>NoImage</members>
+        <members>ProductPhoto</members>
+        <name>StaticResource</name>
     </types>
     <types>
-        <members>*</members>
-        <name>StaticResource</name>
+        <members>Product__c</members>
+        <name>Workflow</name>
+    </types>
+    <types>
+        <members>Mobile</members>
+        <name>Settings</name>
     </types>
     <version>45.0</version>
 </Package>

@@ -62,6 +62,16 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>BillCode__c</fullName>
+        <externalId>true</externalId>
+        <label>BillCode</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>CreatedDateTime__c</fullName>
         <externalId>false</externalId>
         <formula>CreatedDate</formula>
@@ -111,7 +121,7 @@
         <columns>TotalPrice__c</columns>
         <columns>Discount__c</columns>
         <columns>TotalPriceWithDiscount__c</columns>
-        <columns>CREATED_DATE</columns>
+        <columns>CreatedDateTime__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

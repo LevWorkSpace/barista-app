@@ -28,6 +28,10 @@
                 <behavior>Readonly</behavior>
                 <field>CreatedDateTime__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BillCode__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

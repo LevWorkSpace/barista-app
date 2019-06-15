@@ -3,10 +3,6 @@
     <dashboardMobile>
         <enableDashboardIPadApp>true</enableDashboardIPadApp>
     </dashboardMobile>
-    <salesforceMobile>
-        <enableMobileLite>false</enableMobileLite>
-        <enableUserToDeviceLinking>false</enableUserToDeviceLinking>
-    </salesforceMobile>
     <touchMobile>
         <enableTouchAppIPad>true</enableTouchAppIPad>
         <enableTouchAppIPhone>true</enableTouchAppIPhone>

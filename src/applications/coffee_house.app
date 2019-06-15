@@ -18,5 +18,4 @@
     <tabs>Log__c</tabs>
     <tabs>NewBill</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>offee_House_UtilityBar</utilityBar>
 </CustomApplication>
