@@ -1,8 +1,7 @@
 <aura:component controller="NewBillController" description="NewBill" implements="flexipage:availableForAllPageTypes,force:appHostable">
     <aura:attribute name="cache" type="Integer"/>
-    <aura:attribute name="openCalc" type="Boolean" default="false"/>
     <aura:attribute name="selectedProducts" type="List" default="[]"/>
-    <aura:attribute name="bill" type="Bill__c" default="{'totalPrice' : 0, 'discount' : 0, 'totalPriceWithDiscount' : 0}"/>
+    <aura:attribute name="bill" type="Bill__c" default="{'totalPrice' : 0, 'discount' : 0, 'totalPriceWithDiscount' : 0, 'isCache' : null}"/>
     <lightning:overlayLibrary aura:id="popuplib"/>
 
     <aura:handler name="productSelected" event="c:ProductSelected" action="{!c.handleProductSelected}"/>
@@ -14,7 +13,7 @@
         </aura:set>
 
         <aura:if isTrue="{!v.selectedProducts.length > 0}">
-            <div class="slds-scrollable">
+            <div class="">
             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover product-table">
                 <thead>
                     <tr class="slds-line-height_reset">
@@ -37,17 +36,17 @@
                                 <div class="slds-button-group">
                                     <aura:if isTrue="{!selectedProduct.amount == 1}">
                                         <a onclick="{!c.deleteFromBill}" data-index="{!rowIndex}" class="icon-links">
-                                            <lightning:icon iconName="utility:clear" size="medium" alternativeText="delete" class="slds-float--right"/>
+                                            <lightning:icon iconName="utility:clear" size="medium" variant="error" alternativeText="delete" class="slds-float--right"/>
                                         </a>
                                         <aura:set attribute="else">
                                             <a onclick="{!c.minusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                                <lightning:icon iconName="utility:dash" size="medium" alternativeText="minus" class="slds-float--right"/>
+                                                <lightning:icon iconName="utility:dash" variant="warning" size="medium" alternativeText="minus" class="slds-float--right"/>
                                             </a>
                                         </aura:set>
                                     </aura:if>
                                     <ui:outputNumber value="{!selectedProduct.amount}" class="slds-text-align_center amount"/>
                                     <a onclick="{!c.plusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                        <lightning:icon iconName="utility:add" size="medium" alternativeText="plus"/>
+                                        <lightning:icon iconName="utility:add" variant="success" size="medium" alternativeText="plus"/>
                                     </a>
                                 </div>
                             </td>
@@ -83,11 +82,17 @@
                     <div class="slds-m-around_xx-small">
                         <label class="slds-form-element__label slds-no-flex">Total Price with Discount:</label>
                         <span class="total-price"><c:OutputPrice price="{!v.bill.totalPriceWithDiscount}"/></span>
-                        <a onclick="{!c.toggleCalc}" class="slds-p-around_small">
-                            <lightning:icon iconName="utility:money" size="medium" alternativeText="toggleCalc"/>
+                    </div>
+                    <div class="slds-m-around_x-small">
+                        <a  onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="true">
+                            <lightning:icon iconName="utility:money" variant="{!v.bill.isCache == true ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
+                        </a>
+                        <label class="slds-form-element__label slds-no-flex">Cache/Card</label>
+                        <a onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="false">
+                            <lightning:icon iconName="utility:inspector_panel" variant="{!v.bill.isCache == false ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
                         </a>
                     </div>
-                    <aura:if isTrue="{!v.openCalc}">
+                    <aura:if isTrue="{!v.bill.isCache}">
                         <div class="slds-m-around_xx-small">
                             <label class="slds-form-element__label slds-no-flex">Cache:</label>
                             <lightning:input type="number" label="" value="{!v.cache}" class="input-discount"/>

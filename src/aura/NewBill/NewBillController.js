@@ -13,7 +13,9 @@
     },
 
     saveBill: function(component, event, helper) {
-        helper.saveBill(component, component.get('v.bill'), component.get('v.selectedProducts'));
+        if (helper.validate(component)) {
+            helper.saveBill(component, component.get('v.bill'), component.get('v.selectedProducts'));
+        }
     },
 
     deleteFromBill: function(component, event, helper) {
@@ -43,7 +45,7 @@
         helper.recalculateTotal(component, component.get('v.bill'), component.get('v.selectedProducts'));
     },
 
-    toggleCalc: function(component) {
-        component.set('v.openCalc', !component.get('v.openCalc'));
+    toggleCache: function(component, event) {
+        component.set('v.bill.isCache', event.currentTarget.dataset.cachevalue === 'true');
     }
 })

@@ -93,6 +93,29 @@
         <type>Percent</type>
     </fields>
     <fields>
+        <fullName>PaymentMethod__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Method</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cache</fullName>
+                    <default>false</default>
+                    <label>Cache</label>
+                </value>
+                <value>
+                    <fullName>Card</fullName>
+                    <default>false</default>
+                    <label>Card</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>TotalPriceWithDiscount__c</fullName>
         <externalId>false</externalId>
         <formula>TotalPrice__c * (1- Discount__c)</formula>
@@ -122,6 +145,7 @@
         <columns>Discount__c</columns>
         <columns>TotalPriceWithDiscount__c</columns>
         <columns>CreatedDateTime__c</columns>
+        <columns>PaymentMethod__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

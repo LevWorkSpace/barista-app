@@ -3,7 +3,7 @@
     <fieldUpdates>
         <fullName>SetProductCode</fullName>
         <field>ProductCode__c</field>
-        <formula>Name</formula>
+        <formula>LEFT(Name + Description__c, 80)</formula>
         <name>SetProductCode</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
@@ -15,11 +15,12 @@
             <name>SetProductCode</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>false</active>
-        <formula>OR( 
-						ISBLANK(ProductCode__c),
-						ProductCode__c != Name
-					)</formula>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <active>true</active>
+        <formula>OR(
+				ISBLANK(ProductCode__c), 
+				ISCHANGED(Name),
+				ISCHANGED(Description__c)
+)</formula>
+        <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

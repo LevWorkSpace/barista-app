@@ -1,23 +1,39 @@
 <aura:component controller="ProductSearchController" description="ProductSearch">
-    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
-    <aura:attribute name="open" type="Boolean" default="false"/>
-    <aura:attribute name="sections" type="List" description="accordionSections"/>
 
+    <aura:attribute name="open" type="Boolean" default="false"/>
+    <aura:attribute name="sections" type="List" access="private" description="accordionSections"/>
+    <aura:attribute name="selectedSection" type="String" access="private" description="selectedSection"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     <aura:handler name="productSelected" event="c:ProductSelected" action="{!c.handleProductSelected}"/>
     <c:CustomToast aura:id="customToast"/>
 
-    <div style="{!v.open ? '' : 'display:none'}">
+    <div style="{!v.open ? '' : 'display:none'}" aura:id="mainsearch">
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
                     <lightning:buttonIcon iconName="utility:close" alternativeText="close" onclick="{!c.closePopup}" size="large"
                                           class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"/>
-
-                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Products</h2>
+                    <div>
+                        <lightning:buttonGroup class="slds-size_1-of-1">
+                            <aura:iteration items="{!v.sections}" var="section">
+                                <lightning:buttonStateful
+                                        labelWhenOff="{!section.name}"
+                                        labelWhenOn="{!section.name}"
+                                        iconNameWhenOff="utility:search"
+                                        iconNameWhenOn="utility:check"
+                                        state="{!section.name == v.selectedSection}"
+                                        onclick="{!c.selectSection}"
+                                        variant="{!section.name == v.selectedSection ? 'success' : 'neutral'}"
+                                        class="slds-p-around_medium slds-button_stretch"
+                                />
+                            </aura:iteration>
+                        </lightning:buttonGroup>
+                    </div>
                 </header>
-                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <div class="slds-modal__content slds-p-around_medium">
                     <aura:iteration items="{!v.sections}" var="section">
-                        <c:CollapsibleSection title="{!section.name}">
+                        <aura:if isTrue="{!section.name == v.selectedSection}">
                             <lightning:layout multipleRows="true" class="slds-grid">
                                 <aura:iteration items="{!section.products}" var="product">
                                     <lightning:layoutItem class="slds-m-right_xxx-small">
@@ -25,7 +41,7 @@
                                     </lightning:layoutItem>
                                 </aura:iteration>
                             </lightning:layout>
-                        </c:CollapsibleSection>
+                        </aura:if>
                     </aura:iteration>
                 </div>
                 <footer class="slds-modal__footer slds-grid slds-grid_align-center">

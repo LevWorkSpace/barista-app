@@ -2,8 +2,8 @@
     <aura:attribute name="product" type="Object" />
     <aura:registerEvent name="productSelected" type="c:ProductSelected"/>
 
-    <lightning:button onclick="{!c.onProductClick}">
-        <div style="{!'background-image:url(' + (v.product.picture ? v.product.picture : '/resource/NoImage') + ')'}" class="innertile">
+    <lightning:button onclick="{!c.onProductClick}" class="slds-button_stretch">
+        <div style="{!'background-image:url(' + (v.product.picture ? '/resource/ProductPhoto/' + v.product.picture : '/resource/NoImage') + ')'}" class="innertile">
             <div class="lower-third">
                 <h1 class="slds-truncate">{!v.product.name} - {!v.product.cost}&#8372;</h1>
             </div>

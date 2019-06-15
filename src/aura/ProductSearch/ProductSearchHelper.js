@@ -3,7 +3,9 @@
         let action = component.get("c.getActiveProducts");
         action.setCallback(this, function(response) {
             if (response.getState() === "SUCCESS") {
-                component.set('v.sections', response.getReturnValue());
+                let sections = response.getReturnValue();
+                component.set('v.selectedSection', sections[0] ? sections[0].name : '');
+                component.set('v.sections', sections);
             } else {
                 this.handleErrors(response.getError());
             }

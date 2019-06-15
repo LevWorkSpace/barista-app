@@ -47,7 +47,8 @@
     buildBill: function(billWrapper) {
         return {
             TotalPrice__c : billWrapper.totalPrice,
-            Discount__c : billWrapper.discount
+            Discount__c : billWrapper.discount,
+            PaymentMethod__c : billWrapper.isCache ? 'Cache' : 'Card'
         }
     },
 
@@ -77,5 +78,18 @@
         } else {
             console.log("Unknown error");
         }
+    },
+
+    validate: function(component) {
+        if(component.get('v.bill.isCache') == null) {
+            let toastEvent = $A.get("e.force:showToast");
+            toastEvent.setParams({
+                "type" : "warning",
+                "message": "Please select Cache or Card."
+            });
+            toastEvent.fire();
+            return false;
+        }
+        return true;
     }
 })
