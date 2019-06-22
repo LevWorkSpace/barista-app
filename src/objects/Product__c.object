@@ -109,13 +109,18 @@
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
+            <restricted>false</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Drinks</fullName>
+                    <fullName>Hot Drinks</fullName>
                     <default>true</default>
-                    <label>Drinks</label>
+                    <label>Hot Drinks</label>
+                </value>
+                <value>
+                    <fullName>Cold Drinks</fullName>
+                    <default>false</default>
+                    <label>Cold Drinks</label>
                 </value>
                 <value>
                     <fullName>Eats</fullName>
