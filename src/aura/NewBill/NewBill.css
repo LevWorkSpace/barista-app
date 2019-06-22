@@ -1,6 +1,7 @@
 .THIS {
     padding: 0.1em;
     font-size: 1.6em;
+    font-family: Arial,sans-serif;
 }
 .THIS .input-discount .slds-form-element__label {
     display: none;

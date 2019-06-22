@@ -37,17 +37,20 @@
                                 <div class="slds-button-group">
                                     <aura:if isTrue="{!selectedProduct.amount == 1}">
                                         <a onclick="{!c.deleteFromBill}" data-index="{!rowIndex}" class="icon-links">
-                                            <lightning:icon iconName="utility:clear" size="medium" variant="error" alternativeText="delete" class="slds-float--right"/>
+                                            <lightning:icon iconName="utility:clear" size="medium" variant="error"
+                                                            alternativeText="delete" class="slds-float--right slds-p-vertical_small"/>
                                         </a>
                                         <aura:set attribute="else">
                                             <a onclick="{!c.minusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                                <lightning:icon iconName="utility:dash" variant="warning" size="medium" alternativeText="minus" class="slds-float--right"/>
+                                                <lightning:icon iconName="utility:dash" variant="warning" size="medium"
+                                                                alternativeText="minus" class="slds-float--right slds-p-vertical_small"/>
                                             </a>
                                         </aura:set>
                                     </aura:if>
                                     <ui:outputNumber value="{!selectedProduct.amount}" class="slds-text-align_center amount"/>
                                     <a onclick="{!c.plusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                        <lightning:icon iconName="utility:add" variant="success" size="medium" alternativeText="plus"/>
+                                        <lightning:icon iconName="utility:add" variant="success" size="medium"
+                                                        alternativeText="plus" class="slds-p-vertical_small"/>
                                     </a>
                                 </div>
                             </td>
