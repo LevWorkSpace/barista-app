@@ -6,14 +6,15 @@
 
     <aura:handler name="productSelected" event="c:ProductSelected" action="{!c.handleProductSelected}"/>
 
-    <lightning:card title="New Bill" aura:Id="card" class="bill-card">
-
+    <lightning:card aura:Id="card" class="bill-card">
+        <aura:set attribute="title">
+            <label class="slds-text-title_caps">New Bill</label>
+        </aura:set>
         <aura:set attribute="actions">
-            <lightning:button label="Add Product" onclick="{!c.openProductSearch}" class="slds-p-around_medium"/>
+            <lightning:button label="Add Product" onclick="{!c.openProductSearch}" class="slds-p-around_large slds-text-title_caps"/>
         </aura:set>
 
         <aura:if isTrue="{!v.selectedProducts.length > 0}">
-            <div class="">
             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover product-table">
                 <thead>
                     <tr class="slds-line-height_reset">
@@ -62,7 +63,6 @@
                     </aura:iteration>
                 </tbody>
             </table>
-            </div>
         </aura:if>
 
         <aura:set attribute="footer">
@@ -103,7 +103,7 @@
                         </div>
                     </aura:if>
                     <div class="slds-m-around_xx-small">
-                        <lightning:button label="Confirm Bill" onclick="{!c.saveBill}" variant="brand" class="slds-p-around_medium"/>
+                        <lightning:button label="Confirm Bill" onclick="{!c.saveBill}" variant="brand" class="slds-p-around_large slds-text-title_caps"/>
                     </div>
                 </section>
             </aura:if>

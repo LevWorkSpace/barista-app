@@ -1,6 +1,6 @@
 .THIS {
     padding: 0.1em;
-    font-size: 1.2em;
+    font-size: 1.6em;
 }
 .THIS .input-discount .slds-form-element__label {
     display: none;
@@ -40,4 +40,11 @@
 .THIS .total-price {
     font-size: 1.2em;
     border-bottom: solid 1px grey;
+}
+.THIS .slds-button_brand,
+.THIS .slds-button_success {
+    color: white;
+}
+.THIS .slds-text-title_caps {
+    font-size: 1.1em;
 }

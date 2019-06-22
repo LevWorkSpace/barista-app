@@ -8,7 +8,7 @@
     <aura:handler name="productSelected" event="c:ProductSelected" action="{!c.handleProductSelected}"/>
     <c:CustomToast aura:id="customToast"/>
 
-    <div style="{!v.open ? '' : 'display:none'}" aura:id="mainsearch">
+    <div style="{!v.open ? '' : 'display:none'}" aura:id="mainsearch" onscroll="">
         <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
@@ -25,7 +25,7 @@
                                         state="{!section.name == v.selectedSection}"
                                         onclick="{!c.selectSection}"
                                         variant="{!section.name == v.selectedSection ? 'success' : 'neutral'}"
-                                        class="slds-p-around_medium slds-button_stretch"
+                                        class="slds-p-around_large slds-button_stretch slds-text-title_caps"
                                 />
                             </aura:iteration>
                         </lightning:buttonGroup>
@@ -34,7 +34,7 @@
                 <div class="slds-modal__content slds-p-around_medium">
                     <aura:iteration items="{!v.sections}" var="section">
                         <aura:if isTrue="{!section.name == v.selectedSection}">
-                            <lightning:layout multipleRows="true" class="slds-grid">
+                            <lightning:layout multipleRows="true">
                                 <aura:iteration items="{!section.products}" var="product">
                                     <lightning:layoutItem class="slds-m-right_xxx-small">
                                         <c:ProductTile product="{!product}"/>
@@ -45,7 +45,7 @@
                     </aura:iteration>
                 </div>
                 <footer class="slds-modal__footer slds-grid slds-grid_align-center">
-                    <lightning:button label="Done" onclick="{!c.closePopup}" variant="brand" class="slds-p-around_medium"/>
+                    <lightning:button label="Done" onclick="{!c.closePopup}" variant="brand" class="slds-p-around_large slds-text-title_caps"/>
                 </footer>
             </div>
         </section>
