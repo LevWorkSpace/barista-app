@@ -63,13 +63,14 @@
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>BillCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
         <label>BillCode</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>CreatedDateTime__c</fullName>
