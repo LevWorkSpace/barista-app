@@ -10,6 +10,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GarbageCollector</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>NewBillController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -26,6 +30,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Bill__c.Archived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Bill__c.BillCode__c</field>
