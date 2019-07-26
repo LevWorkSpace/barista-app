@@ -58,6 +58,7 @@
                                 <lightning:select onchange="{!c.recalculateTotal}" value="{!selectedProduct.discount}" class="input-discount">
                                     <option value="0">0%</option>
                                     <option value="10">10%</option>
+                                    <option value="50">50%</option>
                                     <option value="100">free</option>
                                 </lightning:select>
                             </td>
