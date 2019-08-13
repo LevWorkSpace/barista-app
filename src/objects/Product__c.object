@@ -118,6 +118,11 @@
                     <label>Hot Drinks</label>
                 </value>
                 <value>
+                    <fullName>Hot Drinks Plant</fullName>
+                    <default>false</default>
+                    <label>Hot Drinks Plant</label>
+                </value>
+                <value>
                     <fullName>Cold Drinks</fullName>
                     <default>false</default>
                     <label>Cold Drinks</label>
