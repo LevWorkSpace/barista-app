@@ -1,11 +1,14 @@
 ({
     getProducts: function(component) {
-        let action = component.get("c.getActiveProducts");
+        let action = component.get("c.getActiveProductsWithSections");
         action.setCallback(this, function(response) {
             if (response.getState() === "SUCCESS") {
-                let sections = response.getReturnValue();
-                component.set('v.selectedSection', sections[0] ? sections[0].name : '');
-                component.set('v.sections', sections);
+                let result = response.getReturnValue();
+                component.set('v.sectionToProducts', result.sectionToProducts);
+                component.set('v.sectionNames', result.sectionNames);
+                let firstSelected = result.sectionNames[0] ? result.sectionNames[0] : '';
+                component.set('v.selectedSection', firstSelected);
+                component.set('v.selectedSectionProducts', result.sectionToProducts[firstSelected] ? result.sectionToProducts[firstSelected] : []);
             } else {
                 this.handleErrors(response.getError());
             }

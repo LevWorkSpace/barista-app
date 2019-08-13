@@ -14,5 +14,6 @@
     selectSection: function(component, event, helper) {
         let selectedSection = event.getSource().get("v.labelWhenOn");
         component.set('v.selectedSection', selectedSection);
+        component.set('v.selectedSectionProducts', component.get('v.sectionToProducts')[selectedSection]);
     }
 })

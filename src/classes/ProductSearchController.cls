@@ -1,36 +1,45 @@
 public with sharing class ProductSearchController {
+    @TestVisible private static final String SECTION_NAMES = 'sectionNames';
+    @TestVisible private static final String SECTION_TO_PRODUCTS = 'sectionToProducts';
 
     @AuraEnabled
-    public static List<Section> getActiveProducts() {
+    public static Map<String, Object> getActiveProductsWithSections() {
         try {
-            Map<String, List<Product>> sectionToProducts = new Map<String, List<Product>>();
-            for (Product__c product : [SELECT Name, Cost__c, Type__c, Picture__c, Description__c
-                                       FROM Product__c WHERE Active__c = true ORDER BY Type__c, Name]) {
-                if (!sectionToProducts.containsKey(product.Type__c)) {
-                    sectionToProducts.put(product.Type__c, new List<Product>());
-                }
-                sectionToProducts.get(product.Type__c).add(new Product(product));
-            }
-            List<Section> sections = new List<Section>();
-            for (PicklistEntry availableType : Product__c.Type__c.getDescribe().getPicklistValues()) {
-                if (sectionToProducts.containsKey(availableType.getValue())) {
-                    sections.add(new Section(availableType.getLabel(), sectionToProducts.get(availableType.getValue())));
-                }
-            }
-            return sections;
+            return new Map<String, Object> {
+                    SECTION_NAMES => getOrderedSectionNames(),
+                    SECTION_TO_PRODUCTS => getSectionToProducts()
+            };
         } catch (Exception e) {
+            saveLog(e.getMessage());
             throw new AuraHandledException(e.getMessage());
         }
     }
 
-    public class Section {
-        @AuraEnabled public String name;
-        @AuraEnabled public List<Product> products;
-
-        public Section(String name, List<Product> products) {
-            this.name = name;
-            this.products = products;
+    private static Map<String, List<Product>> getSectionToProducts() {
+        Map<String, List<Product>> sectionToProducts = new Map<String, List<Product>>();
+        for (Product__c product : [SELECT Name, Cost__c, Type__c, Picture__c, Description__c
+                                   FROM Product__c
+                                   WHERE Active__c = true
+                                   ORDER BY Type__c, Name]) {
+            if (!sectionToProducts.containsKey(product.Type__c)) {
+                sectionToProducts.put(product.Type__c, new List<Product>());
+            }
+            sectionToProducts.get(product.Type__c).add(new Product(product));
         }
+        return sectionToProducts;
+    }
+
+    private static List<String> getOrderedSectionNames() {
+        List<String> sectionNames = new List<String>();
+        for (PicklistEntry availableType : Product__c.Type__c.getDescribe().getPicklistValues()) {
+            sectionNames.add(availableType.getLabel());
+        }
+        return sectionNames;
+    }
+
+    @future
+    private static void saveLog(String error) {
+        insert new Log__c(Error__c = error);
     }
 
     public class Product {

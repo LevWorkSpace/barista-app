@@ -9,12 +9,15 @@ private class ProductSearchControllerTest {
         };
 
         Test.startTest();
-            List<ProductSearchController.Section> sections = ProductSearchController.getActiveProducts();
+            Map<String, Object> productsWithSections = ProductSearchController.getActiveProductsWithSections();
         Test.stopTest();
 
-        System.assertEquals(1, sections.size());
-        System.assertEquals('Drinks', sections[0].name);
-        System.assertEquals(1, sections[0].products.size());
-        System.assertEquals('Test', sections[0].products[0].name);
+        System.assert(productsWithSections.containsKey(ProductSearchController.SECTION_NAMES));
+        System.assert(productsWithSections.containsKey(ProductSearchController.SECTION_TO_PRODUCTS));
+        System.assertEquals(Product__c.Type__c.getDescribe().getPicklistValues().size(),
+                           ((List<String>)productsWithSections.get(ProductSearchController.SECTION_NAMES)).size());
+        Map<String, List<ProductSearchController.Product>> products = (Map<String, List<ProductSearchController.Product>>)productsWithSections.get(ProductSearchController.SECTION_TO_PRODUCTS);
+        System.assertEquals(1, products.size());
+        System.assertEquals(1, products.values().size());
     }
 }
