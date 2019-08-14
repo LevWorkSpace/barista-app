@@ -6,115 +6,117 @@
 
     <aura:handler name="productSelected" event="c:ProductSelected" action="{!c.handleProductSelected}"/>
 
-    <lightning:card aura:Id="card" class="bill-card">
-        <aura:set attribute="title">
-            <label class="slds-text-title_caps">New Bill</label>
-        </aura:set>
-        <aura:set attribute="actions">
-            <lightning:button label="Add Product" onclick="{!c.openProductSearch}" class="slds-p-around_large slds-text-title_caps"/>
-        </aura:set>
+    <div aura:id="disablePullEvent">
+        <lightning:card aura:Id="card" class="bill-card">
+            <aura:set attribute="title">
+                <label class="slds-text-title_caps">New Bill</label>
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:button label="Add Product" onclick="{!c.openProductSearch}" class="slds-p-around_large slds-text-title_caps"/>
+            </aura:set>
 
-        <aura:if isTrue="{!v.selectedProducts.length > 0}">
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover product-table">
-                <thead>
-                    <tr class="slds-line-height_reset">
-                        <th class="slds-truncate">Product</th>
-                        <th class="slds-truncate">Cost</th>
-                        <th class="slds-truncate">Amount</th>
-                        <th class="slds-truncate">Discount</th>
-                        <th class="slds-truncate">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <aura:iteration items="{!v.selectedProducts}" var="selectedProduct" indexVar="rowIndex">
-                        <tr class="slds-hint-parent">
-                            <td class="slds-truncate">
-                                {!selectedProduct.name}
-                                <div class="slds-text-body_small product-description">{!selectedProduct.description}</div>
-                            </td>
-                            <td class="slds-truncate"><c:OutputPrice price="{!selectedProduct.cost}"/></td>
-                            <td class="slds-truncate">
-                                <div class="slds-button-group">
-                                    <aura:if isTrue="{!selectedProduct.amount == 1}">
-                                        <a onclick="{!c.deleteFromBill}" data-index="{!rowIndex}" class="icon-links">
-                                            <lightning:icon iconName="utility:clear" size="medium" variant="error"
-                                                            alternativeText="delete" class="slds-float--right slds-p-vertical_small"/>
-                                        </a>
-                                        <aura:set attribute="else">
-                                            <a onclick="{!c.minusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                                <lightning:icon iconName="utility:dash" variant="warning" size="medium"
-                                                                alternativeText="minus" class="slds-float--right slds-p-vertical_small"/>
-                                            </a>
-                                        </aura:set>
-                                    </aura:if>
-                                    <ui:outputNumber value="{!selectedProduct.amount}" class="slds-text-align_center amount"/>
-                                    <a onclick="{!c.plusAmount}" data-index="{!rowIndex}" class="icon-links">
-                                        <lightning:icon iconName="utility:add" variant="success" size="medium"
-                                                        alternativeText="plus" class="slds-p-vertical_small"/>
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="slds-truncate">
-                                <lightning:select onchange="{!c.recalculateTotal}" value="{!selectedProduct.discount}" class="input-discount">
-                                    <option value="0">0%</option>
-                                    <option value="10">10%</option>
-                                    <option value="50">50%</option>
-                                    <option value="100">free</option>
-                                </lightning:select>
-                            </td>
-                            <td class="slds-truncate"><c:OutputPrice price="{!selectedProduct.totalCost}"/></td>
-                        </tr>
-                    </aura:iteration>
-                </tbody>
-            </table>
-        </aura:if>
-
-        <aura:set attribute="footer">
             <aura:if isTrue="{!v.selectedProducts.length > 0}">
-                <section class="slds-grid slds-grid_vertical footer-total">
-                    <div class="slds-m-around_xx-small">
-                        <label class="slds-form-element__label slds-no-flex">Total Price:</label>
-                        <c:OutputPrice price="{!v.bill.totalPrice}"/>
-                    </div>
-                    <div class="slds-m-around_xx-small centered-result">
-                        <label class="slds-form-element__label slds-no-flex">Bill Discount:</label>
-                        <lightning:select onchange="{!c.recalculateTotal}" value="{!v.bill.discount}" class="input-discount">
-                            <option value="0">0%</option>
-                            <option value="30">30%</option>
-                        </lightning:select>
-                    </div>
-                    <div class="slds-m-around_xx-small">
-                        <label class="slds-form-element__label slds-no-flex">Total Price with Discount:</label>
-                        <span class="total-price"><c:OutputPrice price="{!v.bill.totalPriceWithDiscount}"/></span>
-                    </div>
-                    <div class="slds-m-around_x-small">
-                        <a  onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="true">
-                            <lightning:icon iconName="utility:money" variant="{!v.bill.isCache == true ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
-                        </a>
-                        <label class="slds-form-element__label slds-no-flex">Cache/Card</label>
-                        <a onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="false">
-                            <lightning:icon iconName="utility:inspector_panel" variant="{!v.bill.isCache == false ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
-                        </a>
-                    </div>
-                    <aura:if isTrue="{!v.bill.isCache}">
-                        <div class="slds-m-around_xx-small">
-                            <label class="slds-form-element__label slds-no-flex">Cache:</label>
-                            <lightning:input type="number" label="" value="{!v.cache}" class="input-discount"/>
-                        </div>
-                        <div class="slds-m-around_xx-small">
-                            <label class="slds-form-element__label slds-no-flex">Change:</label>
-                            <c:OutputPrice price="{!v.cache ? v.cache - v.bill.totalPriceWithDiscount : null}"/>
-                        </div>
-                    </aura:if>
-                    <div class="slds-m-around_xx-small">
-                        <lightning:button label="Confirm Bill" onclick="{!c.saveBill}" variant="brand" class="slds-p-around_large slds-text-title_caps"/>
-                    </div>
-                </section>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-no-row-hover product-table">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="slds-truncate">Product</th>
+                            <th class="slds-truncate">Cost</th>
+                            <th class="slds-truncate">Amount</th>
+                            <th class="slds-truncate">Discount</th>
+                            <th class="slds-truncate">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.selectedProducts}" var="selectedProduct" indexVar="rowIndex">
+                            <tr class="slds-hint-parent">
+                                <td class="slds-truncate">
+                                    {!selectedProduct.name}
+                                    <div class="slds-text-body_small product-description">{!selectedProduct.description}</div>
+                                </td>
+                                <td class="slds-truncate"><c:OutputPrice price="{!selectedProduct.cost}"/></td>
+                                <td class="slds-truncate">
+                                    <div class="slds-button-group">
+                                        <aura:if isTrue="{!selectedProduct.amount == 1}">
+                                            <a onclick="{!c.deleteFromBill}" data-index="{!rowIndex}" class="icon-links">
+                                                <lightning:icon iconName="utility:clear" size="medium" variant="error"
+                                                                alternativeText="delete" class="slds-float--right slds-p-vertical_small"/>
+                                            </a>
+                                            <aura:set attribute="else">
+                                                <a onclick="{!c.minusAmount}" data-index="{!rowIndex}" class="icon-links">
+                                                    <lightning:icon iconName="utility:dash" variant="warning" size="medium"
+                                                                    alternativeText="minus" class="slds-float--right slds-p-vertical_small"/>
+                                                </a>
+                                            </aura:set>
+                                        </aura:if>
+                                        <ui:outputNumber value="{!selectedProduct.amount}" class="slds-text-align_center amount"/>
+                                        <a onclick="{!c.plusAmount}" data-index="{!rowIndex}" class="icon-links">
+                                            <lightning:icon iconName="utility:add" variant="success" size="medium"
+                                                            alternativeText="plus" class="slds-p-vertical_small"/>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="slds-truncate">
+                                    <lightning:select onchange="{!c.recalculateTotal}" value="{!selectedProduct.discount}" class="input-discount">
+                                        <option value="0">0%</option>
+                                        <option value="10">10%</option>
+                                        <option value="50">50%</option>
+                                        <option value="100">free</option>
+                                    </lightning:select>
+                                </td>
+                                <td class="slds-truncate"><c:OutputPrice price="{!selectedProduct.totalCost}"/></td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
             </aura:if>
-        </aura:set>
 
-    </lightning:card>
+            <aura:set attribute="footer">
+                <aura:if isTrue="{!v.selectedProducts.length > 0}">
+                    <section class="slds-grid slds-grid_vertical footer-total">
+                        <div class="slds-m-around_xx-small">
+                            <label class="slds-form-element__label slds-no-flex">Total Price:</label>
+                            <c:OutputPrice price="{!v.bill.totalPrice}"/>
+                        </div>
+                        <div class="slds-m-around_xx-small centered-result">
+                            <label class="slds-form-element__label slds-no-flex">Bill Discount:</label>
+                            <lightning:select onchange="{!c.recalculateTotal}" value="{!v.bill.discount}" class="input-discount">
+                                <option value="0">0%</option>
+                                <option value="30">30%</option>
+                            </lightning:select>
+                        </div>
+                        <div class="slds-m-around_xx-small">
+                            <label class="slds-form-element__label slds-no-flex">Total Price with Discount:</label>
+                            <span class="total-price"><c:OutputPrice price="{!v.bill.totalPriceWithDiscount}"/></span>
+                        </div>
+                        <div class="slds-m-around_x-small">
+                            <a  onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="true">
+                                <lightning:icon iconName="utility:money" variant="{!v.bill.isCache == true ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
+                            </a>
+                            <label class="slds-form-element__label slds-no-flex">Cache/Card</label>
+                            <a onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="false">
+                                <lightning:icon iconName="utility:inspector_panel" variant="{!v.bill.isCache == false ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
+                            </a>
+                        </div>
+                        <aura:if isTrue="{!v.bill.isCache}">
+                            <div class="slds-m-around_xx-small">
+                                <label class="slds-form-element__label slds-no-flex">Cache:</label>
+                                <lightning:input type="number" label="" value="{!v.cache}" class="input-discount"/>
+                            </div>
+                            <div class="slds-m-around_xx-small">
+                                <label class="slds-form-element__label slds-no-flex">Change:</label>
+                                <c:OutputPrice price="{!v.cache ? v.cache - v.bill.totalPriceWithDiscount : null}"/>
+                            </div>
+                        </aura:if>
+                        <div class="slds-m-around_xx-small">
+                            <lightning:button label="Confirm Bill" onclick="{!c.saveBill}" variant="brand" class="slds-p-around_large slds-text-title_caps"/>
+                        </div>
+                    </section>
+                </aura:if>
+            </aura:set>
 
-    <c:ProductSearch aura:Id="productSearch"/>
+        </lightning:card>
+
+        <c:ProductSearch aura:Id="productSearch"/>
+    </div>
     
 </aura:component>

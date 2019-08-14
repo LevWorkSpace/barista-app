@@ -91,5 +91,9 @@
             return false;
         }
         return true;
+    },
+
+    scrollStopPropagation: function(e) {
+         e.stopPropagation();
     }
 })
