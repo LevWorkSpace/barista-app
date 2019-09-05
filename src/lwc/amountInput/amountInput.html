@@ -1,0 +1,21 @@
+<template>
+    <template if:true={singleAmount}>
+        <a onclick={decrement} class="icon-links">
+            <lightning-icon icon-name="utility:clear" size="medium" variant="error"
+                            alternative-text="delete" class="slds-p-around--small"></lightning-icon>
+        </a>
+    </template>
+    <template if:false={singleAmount}>
+        <a onclick={decrement} class="icon-links">
+            <lightning-icon icon-name="utility:dash" variant="warning" size="medium"
+                            alternative-text="minus" class="slds-p-around--small amount-input"></lightning-icon>
+        </a>
+    </template>
+
+    <label class="slds-text-align--center amount">{amount}</label>
+
+    <a onclick={increment} class="icon-links">
+        <lightning-icon icon-name="utility:add" variant="success" size="medium"
+                        alternative-text="plus" class="slds-p-around--small"></lightning-icon>
+    </a>
+</template>

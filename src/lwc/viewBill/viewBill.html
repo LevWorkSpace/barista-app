@@ -1,0 +1,52 @@
+<template>
+    <template if:true={bill}>
+        <article class="slds-p-around--small">
+            <section class="slds-grid slds-wrap slds-border--top slds-p-around--small">
+                <label class="slds-p-around--x-small slds-size--1-of-1 bill-label">Bill</label>
+                <div class="slds-p-around--x-small slds-size--1-of-2">
+                    <label class="slds-p-right--x-small">Total Price:</label>
+                    {bill.TotalPrice__c}&#8372;
+                </div>
+                <div class="slds-p-around--x-small slds-size--1-of-2">
+                    <label class="slds-p-right--x-small">Discount:</label>
+                    <lightning-formatted-number format-style="percent" value={bill.Discount__c}></lightning-formatted-number>
+                </div>
+                <div class="slds-p-around--x-small slds-size--1-of-2">
+                    <label class="slds-p-right--x-small">Total Price with Discount:</label>
+                    {bill.TotalPriceWithDiscount__c}&#8372;
+                </div>
+                <div class="slds-p-around--x-small slds-size--1-of-2">
+                    <label class="slds-p-right--x-small">Payment Method:</label>
+                    <lightning-formatted-text value={bill.PaymentMethod__c}></lightning-formatted-text>
+                </div>
+            </section>
+
+            <template if:true={bill.ProductBills__r}>
+                <table class="slds-table slds-table--cell-buffer slds-table--bordered slds-no-row-hover product-table">
+                    <thead>
+                    <tr class="slds-line-height--reset">
+                        <th class="slds-truncate">Product</th>
+                        <th class="slds-truncate">Cost</th>
+                        <th class="slds-truncate">Amount</th>
+                        <th class="slds-truncate">Discount</th>
+                        <th class="slds-truncate">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <template for:each={bill.ProductBills__r} for:item="product" for:index="rowIndex">
+                        <template if:true={product}>
+                            <tr class="slds-hint-parent" key={product.Id}>
+                                <td class="slds-truncate">{product.Product__r.Name}</td>
+                                <td class="slds-truncate">{product.Cost__c}&#8372;</td>
+                                <td class="slds-truncate">{product.Amount__c}</td>
+                                <td class="slds-truncate">{product.Discount__c}</td>
+                                <td class="slds-truncate">{product.TotalCost__c}&#8372;</td>
+                            </tr>
+                        </template>
+                    </template>
+                    </tbody>
+                </table>
+            </template>
+        </article>
+    </template>
+</template>

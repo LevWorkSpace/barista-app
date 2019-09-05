@@ -1,0 +1,11 @@
+section {
+    max-height: 0;
+    transition: max-height 0.25s linear;
+    overflow: hidden;
+}
+
+section.visible {
+    height: auto;
+    max-height: 50px;
+    transition: max-height 0.25s linear;
+}

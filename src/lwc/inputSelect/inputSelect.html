@@ -1,0 +1,9 @@
+<template>
+    <div class="slds-select--container">
+        <select class="slds-select" onchange={handleChange}>
+            <template for:each={options} for:item="option">
+                <option value={option.value} key={option.value}>{option.label}</option>
+            </template>
+        </select>
+    </div>
+</template>

@@ -1,0 +1,128 @@
+<template>
+    <div if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading..." variant="brand"></lightning-spinner>
+    </div>
+    <article class="slds-card">
+        <header class="slds-card__header slds-grid slds-grid--align-spread">
+            <section class="slds-m-left--medium">
+                <button onclick={loadPreviousBill} disabled={disablePreviousButton}
+                        class="slds-button slds-button--neutral slds-p-around--large title-caps">
+                    &#8678;
+                </button>
+
+                <label class="title-caps slds-p-around--small">
+                    <template if:false={oldBill}>
+                        New Bill
+                    </template>
+                    <template if:true={oldBill}>
+                        <lightning-formatted-date-time hour="2-digit" weekday="short"
+                                                       minute="2-digit" value={oldBill.CreatedDate}>
+                        </lightning-formatted-date-time>
+                    </template>
+                </label>
+
+                <button onclick={loadNextBill} disabled={disableNextButton}
+                        class="slds-button slds-button--neutral slds-p-around--large title-caps">
+                    &#8680;
+                </button>
+            </section>
+
+            <section>
+                <button onclick={clearView}
+                        class="slds-button slds-button--neutral slds-p-around--large title-caps">
+                    New Bill
+                </button>
+                <button onclick={openProductSearch} disabled={oldBill}
+                        class="slds-button slds-button--brand slds-p-around--large title-caps">
+                    Add Product
+                </button>
+            </section>
+        </header>
+
+        <c-message-banner></c-message-banner>
+
+        <template if:true={oldBill}>
+            <c-view-bill bill={oldBill}></c-view-bill>
+        </template>
+
+        <template if:true={selectedProducts.length}>
+            <table class="slds-table slds-table--cell-buffer slds-table--bordered slds-no-row-hover product-table">
+                <thead>
+                <tr class="slds-line-height--reset">
+                    <th class="slds-truncate">Product</th>
+                    <th class="slds-truncate">Cost</th>
+                    <th class="slds-truncate">Amount</th>
+                    <th class="slds-truncate">Discount</th>
+                    <th class="slds-truncate">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <template for:each={selectedProducts} for:item="selectedProduct" for:index="rowIndex">
+                    <template if:true={selectedProduct}>
+                    <tr class="slds-hint-parent" key={selectedProduct.key}>
+                        <td class="slds-truncate">
+                            {selectedProduct.name}
+                            <div class="product-description">{selectedProduct.description}</div>
+                        </td>
+                        <td class="slds-truncate">{selectedProduct.cost}&#8372;</td>
+                        <td class="slds-truncate">
+                            <div class="slds-button-group">
+                                <c-amount-input onchange={handleAmountChanged} data-index={rowIndex}></c-amount-input>
+                            </div>
+                        </td>
+                        <td class="slds-truncate">
+                            <c-input-select options={PRODUCT_DISCOUNT} onchange={handleProductDiscountSelected} data-index={rowIndex}></c-input-select>
+                        </td>
+                        <td class="slds-truncate">{selectedProduct.totalCost}&#8372;</td>
+                    </tr>
+                    </template>
+                </template>
+                </tbody>
+            </table>
+
+            <section class="slds-grid slds-grid--vertical slds-text-align--center slds-border--top">
+                <div class="slds-m-around--x-small">
+                    <label class="slds-p-right--x-small">Total Price:</label>
+                    {bill.totalPrice}&#8372;
+                </div>
+                <div class="slds-m-around--x-small centered-result">
+                    <label class="slds-p-right--x-small">Bill Discount:</label>
+                    <c-input-select options={BILL_DISCOUNT} onchange={handleBillDiscountSelected} class="discount-select"></c-input-select>
+                </div>
+                <div class="slds-m-around--x-small">
+                    <label class="slds-p-right--x-small">Total Price with Discount:</label>
+                    <span class="slds-border--bottom slds-text-color_success">{bill.totalPriceWithDiscount}&#8372;</span>
+                </div>
+                <div class="slds-m-around--x-small">
+                    <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="true">
+                        <lightning-icon icon-name="utility:money" variant={cashVariant} size="large" alternative-text="cash"></lightning-icon>
+                    </a>
+                    <label class="slds-p-right--x-small"><abbr class="slds-required">*</abbr>Cash/Card</label>
+                    <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="false">
+                        <lightning-icon icon-name="utility:inspector_panel" variant={cardVariant} size="large" alternative-text="card"></lightning-icon>
+                    </a>
+                </div>
+                <template if:true={bill.isCash}>
+                    <div class="slds-m-around--x-small">
+                        <label class="slds-p-right--x-small">Cash:</label>
+                        <input type="number" onchange={setChange} class="input-discount">
+                    </div>
+                    <template if:true={change}>
+                        <div class="slds-m-around--x-small">
+                            <label class="slds-p-right--x-small">Change:</label>
+                            {change}&#8372;
+                        </div>
+                    </template>
+                </template>
+                <div class="slds-p-around--x-small slds-border--top">
+                    <button onclick={saveBill} disabled={billIsNotReady} class="slds-button slds-button--success slds-p-around--large title-caps">
+                        Confirm Bill
+                    </button>
+                </div>
+            </section>
+        </template>
+
+        <c-product-selector onproductselected={handleProductSelected}></c-product-selector>
+
+    </article>
+</template>

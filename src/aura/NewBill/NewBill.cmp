@@ -92,14 +92,14 @@
                             <a  onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="true">
                                 <lightning:icon iconName="utility:money" variant="{!v.bill.isCache == true ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
                             </a>
-                            <label class="slds-form-element__label slds-no-flex">Cache/Card</label>
+                            <label class="slds-form-element__label slds-no-flex">Cash/Card</label>
                             <a onclick="{!c.toggleCache}" class="slds-p-around_medium" data-cachevalue="false">
                                 <lightning:icon iconName="utility:inspector_panel" variant="{!v.bill.isCache == false ? 'success' : 'neutral'}" size="large" alternativeText="cache"/>
                             </a>
                         </div>
                         <aura:if isTrue="{!v.bill.isCache}">
                             <div class="slds-m-around_xx-small">
-                                <label class="slds-form-element__label slds-no-flex">Cache:</label>
+                                <label class="slds-form-element__label slds-no-flex">Cash:</label>
                                 <lightning:input type="number" label="" value="{!v.cache}" class="input-discount"/>
                             </div>
                             <div class="slds-m-around_xx-small">

@@ -17,5 +17,6 @@
     <tabs>standard-report</tabs>
     <tabs>Log__c</tabs>
     <tabs>NewBill</tabs>
+    <tabs>Bill_Container</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

@@ -112,9 +112,9 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Cache</fullName>
+                    <fullName>Cash</fullName>
                     <default>false</default>
-                    <label>Cache</label>
+                    <label>Cash</label>
                 </value>
                 <value>
                     <fullName>Card</fullName>

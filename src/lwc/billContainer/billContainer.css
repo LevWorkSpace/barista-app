@@ -1,0 +1,20 @@
+.product-description {
+    white-space: normal;
+    font-size: 0.8em;
+}
+
+c-input-select.discount-select {
+    display: inline-block;
+    width: 100px;
+}
+
+input.input-discount {
+    height: 58px;
+    width: 115px;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+}
+
+article.slds-card {
+    min-width: 750px;
+}

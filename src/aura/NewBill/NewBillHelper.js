@@ -48,7 +48,7 @@
         return {
             TotalPrice__c : billWrapper.totalPrice,
             Discount__c : billWrapper.discount,
-            PaymentMethod__c : billWrapper.isCache ? 'Cache' : 'Card'
+            PaymentMethod__c : billWrapper.isCache ? 'Cash' : 'Card'
         }
     },
 
@@ -85,7 +85,7 @@
             let toastEvent = $A.get("e.force:showToast");
             toastEvent.setParams({
                 "type" : "warning",
-                "message": "Please select Cache or Card."
+                "message": "Please select Cash or Card."
             });
             toastEvent.fire();
             return false;

@@ -1,0 +1,48 @@
+<template>
+    <div class={isOpen}>
+        <template if:true={productSections.data}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal--large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+                <div class="slds-modal__container">
+
+                    <header class="slds-modal__header">
+
+                            <lightning-icon icon-name="utility:close" alternative-text="close" size="large" variant="inverse"
+                                            class="slds-button slds-button--icon-inverse slds-modal__close" onclick={closeSearch}></lightning-icon>
+
+
+                        <lightning-button-group class="slds-size--1-of-1">
+                            <template for:each={productSections.data.values} for:item="section">
+                                <c-selectable-section name={section.label}
+                                                      selected-name={selectedSectionName}
+                                                      onsectionselected={handleSectionSelected}
+                                                      class="slds-button slds-button_stretch"
+                                                      key={section.label}>
+                                </c-selectable-section>
+                            </template>
+                        </lightning-button-group>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <lightning-layout multiple-rows="true">
+                            <template if:true={products.data}>
+                                <template for:each={selectedSectionProducts} for:item="product">
+                                    <lightning-layout-item class="slds-m-right--xx-small" key={product.name}>
+                                        <c-product-item product={product} onproductselected={handleProductSelected}></c-product-item>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                        </lightning-layout>
+                    </div>
+
+                    <footer class="slds-modal__footer slds-grid slds-grid--align-center">
+                        <button onclick={closeSearch} class="slds-button slds-button--success slds-p-around--large title-caps">
+                            Done
+                        </button>
+                    </footer>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </template>
+    </div>
+</template>

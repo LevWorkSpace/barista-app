@@ -1,0 +1,13 @@
+button {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+button.slds-button--success {
+    color: white;
+}
+
+button.slds-is-not-selected {
+    background: transparent;
+}
