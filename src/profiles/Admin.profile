@@ -29,6 +29,10 @@
         <apexClass>ProductSearchControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>Reporting</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -130,6 +134,21 @@
         <field>Product__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SensitiveConfigurations__c.TelegramChannelId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SensitiveConfigurations__c.TelegramTemplateMessage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SensitiveConfigurations__c.TelegramToken__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Bill__c-Admin Bill Layout</layout>
     </layoutAssignments>
@@ -141,6 +160,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Product__c-Admin Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SensitiveConfigurations__c-Sensitive Configurations Layout</layout>
     </layoutAssignments>
     <loginIpRanges>
         <endAddress>255.255.255.255</endAddress>
@@ -191,6 +213,19 @@
         <object>Product__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>SensitiveConfigurations__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <tabVisibilities>
+        <tab>Bill_Container</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <tabVisibilities>
         <tab>Bill__c</tab>
         <visibility>DefaultOn</visibility>
@@ -205,6 +240,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Product__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>SensitiveConfigurations__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>

@@ -18,5 +18,6 @@
     <tabs>Log__c</tabs>
     <tabs>NewBill</tabs>
     <tabs>Bill_Container</tabs>
+    <tabs>SensitiveConfigurations__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

@@ -29,6 +29,10 @@
         <apexClass>ProductSearchControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>Reporting</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
@@ -130,6 +134,21 @@
         <field>Product__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>SensitiveConfigurations__c.TelegramChannelId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>SensitiveConfigurations__c.TelegramTemplateMessage__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>SensitiveConfigurations__c.TelegramToken__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Bill__c-Barista Bill Layout</layout>
     </layoutAssignments>
@@ -183,6 +202,10 @@
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabVisibilities>
+        <tab>Bill_Container</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Bill__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
@@ -196,6 +219,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Product__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>SensitiveConfigurations__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
