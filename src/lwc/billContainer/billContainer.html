@@ -3,7 +3,7 @@
         <lightning-spinner alternative-text="Loading..." variant="brand"></lightning-spinner>
     </div>
     <article class="slds-card">
-        <header class="slds-card__header slds-grid slds-grid--align-spread">
+        <header class="slds-card__header slds-grid slds-grid--align-spread slds-p-horizontal--medium">
             <section class="slds-m-left--medium">
                 <button onclick={loadPreviousBill} disabled={disablePreviousButton}
                         class="slds-button slds-button--neutral slds-p-around--large title-caps">
@@ -27,7 +27,7 @@
                 </button>
             </section>
 
-            <section>
+            <section class="slds-m-right--medium">
                 <button onclick={clearView}
                         class="slds-button slds-button--neutral slds-p-around--large title-caps">
                     New Bill
@@ -105,7 +105,7 @@
                 <template if:true={bill.isCash}>
                     <div class="slds-m-around--x-small">
                         <label class="slds-p-right--x-small">Cash:</label>
-                        <input type="number" onchange={setChange} class="input-discount">
+                        <input type="number" onchange={setChange} class="input-cash">
                     </div>
                     <template if:true={change}>
                         <div class="slds-m-around--x-small">

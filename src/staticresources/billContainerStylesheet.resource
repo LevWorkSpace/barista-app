@@ -3,18 +3,21 @@ c-bill-container {
 	font-family: Arial,sans-serif;
 	color: rgb(97,97,97);
 }
-
 c-product-selector {
 	font-size: 1.6rem;
 }
-
 .title-caps {
     text-transform: uppercase;
     font-size: 1.7rem;
 }
 
-header.flexipageHeader.slds-page-header.uiBlock.oneAnchorHeader {
-	display: none;
+html {
+    font-size: 16px;
+}
+@media (max-width: 500px) {
+    html {
+        font-size: 6px;
+    }
 }
 
 button.slds-button--brand,

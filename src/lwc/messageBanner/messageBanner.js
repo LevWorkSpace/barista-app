@@ -3,7 +3,7 @@ import { LightningElement, api, track } from 'lwc';
 export default class MessageBanner extends LightningElement {
     @track message = null;
     @track severity = '';
-    @api duration = 1000;
+    @api duration = 3000;
 
     @api showMessage(message, severity) {
         this.message = message;

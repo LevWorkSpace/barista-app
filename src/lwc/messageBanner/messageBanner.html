@@ -1,9 +1,10 @@
-
 <template>
     <section>
-        <label class={bannerClass}>
-            <lightning-icon icon-name={iconName} variant="inverse"></lightning-icon>
-            {message}
-        </label>
+        <template if:true={message}>
+            <label class={bannerClass}>
+                <lightning-icon icon-name={iconName} variant="inverse"></lightning-icon>
+                {message}
+            </label>
+        </template>
     </section>
 </template>

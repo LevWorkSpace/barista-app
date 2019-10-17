@@ -5,16 +5,16 @@
 
 c-input-select.discount-select {
     display: inline-block;
-    width: 100px;
+    width: 6.35rem;
 }
 
-input.input-discount {
-    height: 58px;
-    width: 115px;
+input.input-cash {
+    height: 3.6rem;
+    width: 7.2rem;
     border: 1px solid rgb(221, 219, 218);
     border-radius: .25rem;
 }
 
 article.slds-card {
-    min-width: 750px;
+    min-width: 51rem;
 }
