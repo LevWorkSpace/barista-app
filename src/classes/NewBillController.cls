@@ -13,7 +13,7 @@ public with sharing class NewBillController {
 
         } catch(Exception e) {
             Database.rollback(noProductsNoBillSavepoint);
-            saveLog(e.getMessage());
+            TheMostAbstractUtility.logException('NewBillController.saveBillWithProducts', e);
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -29,14 +29,8 @@ public with sharing class NewBillController {
                     OFFSET :offsetValue];
 
         } catch(Exception e) {
-            saveLog(e.getMessage());
+            TheMostAbstractUtility.logException('NewBillController.getPreviousBill', e);
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    @future
-    private static void saveLog(String error) {
-        insert new Log__c(Error__c = error);
-    }
-
 }

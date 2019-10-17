@@ -10,7 +10,7 @@ public with sharing class ProductSearchController {
                     SECTION_TO_PRODUCTS => getSectionToProducts()
             };
         } catch (Exception e) {
-            saveLog(e.getMessage());
+            TheMostAbstractUtility.logException('ProductSearchController.getActiveProductsWithSections', e);
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -35,11 +35,6 @@ public with sharing class ProductSearchController {
             sectionNames.add(availableType.getLabel());
         }
         return sectionNames;
-    }
-
-    @future
-    private static void saveLog(String error) {
-        insert new Log__c(Error__c = error);
     }
 
     public class Product {

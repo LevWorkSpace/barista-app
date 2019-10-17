@@ -27,14 +27,9 @@ public class Archivator implements Schedulable {
             insert dailyIncome;
         } catch (Exception e) {
             Database.rollback(archivationFailed);
-            saveLog(e.getMessage() + ' ' + e.getStackTraceString());
+            TheMostAbstractUtility.logException('Archivator', e);
             throw e;
         }
-    }
-
-    @future
-    private static void saveLog(String error) {
-        insert new Log__c(Error__c = error);
     }
 
     /** Execute to achieve all

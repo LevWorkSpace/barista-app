@@ -5,7 +5,7 @@ public with sharing class ProductSelectorController {
         try {
             return getSectionToProducts();
         } catch (Exception e) {
-            saveLog(e.getMessage());
+            TheMostAbstractUtility.logException('ProductSelectorController.getProductsBySection', e);
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -22,11 +22,6 @@ public with sharing class ProductSelectorController {
             sectionToProducts.get(product.Type__c).add(new Product(product));
         }
         return sectionToProducts;
-    }
-
-    @future
-    private static void saveLog(String error) {
-        insert new Log__c(Error__c = error);
     }
 
     public class Product {

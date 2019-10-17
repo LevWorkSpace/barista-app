@@ -10,11 +10,10 @@ public class Reporting implements Schedulable {
 
     public void execute(SchedulableContext param1) {
         try {
-
             Decimal dailyTotal = getDailyTotal();
             new TelegramTotalReporter().send(dailyTotal);
         } catch (Exception e) {
-            saveLog('Reporting error: ' + e.getMessage());
+            TheMostAbstractUtility.logException('Reporting.execute: ', e);
         }
     }
 
@@ -52,27 +51,19 @@ public class Reporting implements Schedulable {
             HttpRequest request = new HttpRequest();
             request.setHeader('Content-Type', 'application/json;charset=UTF-8');
             request.setEndpoint(TELEGRAM_API_URL + configuration.TelegramToken__c + TELEGRAM_COMMAND_SEND);
-            System.debug(TELEGRAM_API_URL + configuration.TelegramToken__c + TELEGRAM_COMMAND_SEND);
             request.setMethod('POST');
-            System.debug(JSON.serialize(telegramMessage));
             request.setBody(JSON.serialize(telegramMessage));
 
             HttpResponse response = new Http().send(request);
-
             if (response.getStatusCode() != 200) {
-                saveLog('Telegram error: ' + response.getStatusCode() + ' | ' + response.getStatus());
+                TheMostAbstractUtility.logError('Reporting.sendToTelegram: ' + response.getStatusCode() + ' | ' + response.getStatus());
             }
         }
     }
 
     private static Decimal getDailyTotal() {
         AggregateResult result = [SELECT sum(TotalPriceWithDiscount__c) dailyTotal FROM Bill__c WHERE CreatedDate = TODAY];
-        return (Decimal)result.get('dailyTotal');
-    }
-
-    @future
-    private static void saveLog(String error) {
-        insert new Log__c(Error__c = error);
+        return result.get('dailyTotal') == null ? 0 : (Decimal)result.get('dailyTotal');
     }
 
     private class TelegramMessage {

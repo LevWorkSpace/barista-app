@@ -179,9 +179,10 @@
 *bold text* | 
 _italic text_</inlineHelpText>
         <label>Telegram Template Message</label>
-        <required>false</required>
+        <length>70000</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>TelegramToken__c</fullName>
