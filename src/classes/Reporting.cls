@@ -1,4 +1,4 @@
-public class Reporting implements Schedulable {
+public class Reporting implements Schedulable, Database.AllowsCallouts {
 
     public void execute(SchedulableContext param1) {
         try {
