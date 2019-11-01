@@ -3,7 +3,7 @@
         <lightning-spinner alternative-text="Loading..." variant="brand"></lightning-spinner>
     </div>
     <article class="slds-card">
-        <header class="slds-card__header slds-grid slds-grid--align-spread slds-p-horizontal--medium">
+        <header class="slds-p-vertical--x-small slds-grid slds-grid--align-spread slds-p-horizontal--medium slds-border--bottom">
             <section class="slds-m-left--medium">
                 <button onclick={loadPreviousBill} disabled={disablePreviousButton}
                         class="slds-button slds-button--neutral slds-p-around--large title-caps">
@@ -80,40 +80,42 @@
                 </tbody>
             </table>
 
-            <section class="slds-grid slds-grid--vertical slds-text-align--center slds-border--top">
-                <div class="slds-m-around--x-small">
-                    <label class="slds-p-right--x-small">Total Price:</label>
-                    {bill.totalPrice}&#8372;
-                </div>
-                <div class="slds-m-around--x-small centered-result">
-                    <label class="slds-p-right--x-small">Bill Discount:</label>
-                    <c-input-select options={BILL_DISCOUNT} onchange={handleBillDiscountSelected} class="discount-select"></c-input-select>
-                </div>
-                <div class="slds-m-around--x-small">
-                    <label class="slds-p-right--x-small">Total Price with Discount:</label>
-                    <span class="slds-border--bottom slds-text-color_success">{bill.totalPriceWithDiscount}&#8372;</span>
-                </div>
-                <div class="slds-m-around--x-small">
-                    <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="true">
-                        <lightning-icon icon-name="utility:money" variant={cashVariant} size="large" alternative-text="cash"></lightning-icon>
-                    </a>
-                    <label class="slds-p-right--x-small"><abbr class="slds-required">*</abbr>Cash/Card</label>
-                    <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="false">
-                        <lightning-icon icon-name="utility:inspector_panel" variant={cardVariant} size="large" alternative-text="card"></lightning-icon>
-                    </a>
-                </div>
-                <template if:true={bill.isCash}>
+            <section class="slds-grid slds-grid--vertical slds-text-align--center">
+                <div class="slds-border--bottom slds-border--top">
                     <div class="slds-m-around--x-small">
-                        <label class="slds-p-right--x-small">Cash:</label>
-                        <input type="number" onchange={setChange} class="input-cash">
+                        <label class="slds-p-right--x-small">Total Price:</label>
+                        {bill.totalPrice}&#8372;
                     </div>
-                    <template if:true={change}>
+                    <div class="slds-m-around--x-small centered-result">
+                        <label class="slds-p-right--x-small">Bill Discount:</label>
+                        <c-input-select options={BILL_DISCOUNT} onchange={handleBillDiscountSelected} class="discount-select"></c-input-select>
+                    </div>
+                    <div class="slds-m-around--x-small">
+                        <label class="slds-p-right--x-small">Total Price with Discount:</label>
+                        <span class="slds-border--bottom slds-text-color_success">{bill.totalPriceWithDiscount}&#8372;</span>
+                    </div>
+                    <div class="slds-m-around--x-small">
+                        <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="true">
+                            <lightning-icon icon-name="utility:money" variant={cashVariant} size="large" alternative-text="cash"></lightning-icon>
+                        </a>
+                        <label class="slds-p-right--x-small"><abbr class="slds-required">*</abbr>Cash/Card</label>
+                        <a onclick={toggleCash} class="slds-p-around--medium" data-cashvalue="false">
+                            <lightning-icon icon-name="utility:inspector_panel" variant={cardVariant} size="large" alternative-text="card"></lightning-icon>
+                        </a>
+                    </div>
+                    <template if:true={bill.isCash}>
                         <div class="slds-m-around--x-small">
-                            <label class="slds-p-right--x-small">Change:</label>
-                            {change}&#8372;
+                            <label class="slds-p-right--x-small">Cash:</label>
+                            <input type="number" onchange={setChange} onkeyup={setChange} class="input-cash">
                         </div>
+                        <template if:true={change}>
+                            <div class="slds-m-around--x-small">
+                                <label class="slds-p-right--x-small">Change:</label>
+                                {change}&#8372;
+                            </div>
+                        </template>
                     </template>
-                </template>
+                </div>
                 <div class="slds-p-around--x-small slds-border--top">
                     <button onclick={saveBill} disabled={billIsNotReady} class="slds-button slds-button--success slds-p-around--large title-caps">
                         Confirm Bill

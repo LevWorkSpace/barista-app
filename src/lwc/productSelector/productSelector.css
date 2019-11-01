@@ -1,12 +1,15 @@
 .slds-modal__close {
     width: 3rem;
     height: 3rem;
-    top: -2.5em;
+    top: -2em;
     right: 0.5rem;
+}
+.slds-modal {
+    margin-bottom: 3em;
 }
 .slds-modal__container {
     margin: 0 auto;
-    margin-top: 1em;
+    margin-top: 2em;
     width: 90%;
 }
 
